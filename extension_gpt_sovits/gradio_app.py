@@ -6,7 +6,6 @@ from gpt_sovits.Synthesizers.base import (
 )
 from gpt_sovits.src.common_config_manager import app_config, __version__
 from importlib import import_module
-import gpt_sovits.tools.i18n.i18n as i18n_module
 from time import time as ttime
 from functools import partial
 import os
@@ -36,11 +35,6 @@ def get_audio(*data, streaming=False):
     data["stream"] = streaming
 
     # Create TTS synthesizer instance
-    i18n = i18n_module.I18nAuto(
-        language=app_config.locale,
-        locale_path=f"gpt_sovits/Synthesizers/{synthesizer_name}/configs/i18n/locale",
-    )
-    
     # Dynamically import synthesizer module
     synthesizer_module = import_module(f"gpt_sovits.Synthesizers.{synthesizer_name}")
     TTS_Synthesizer = synthesizer_module.TTS_Synthesizer
@@ -49,7 +43,7 @@ def get_audio(*data, streaming=False):
     tts_synthesizer = TTS_Synthesizer(debug_mode=True)
 
     if data.get("text") in ["", None]:
-        gr.Warning(i18n("Text cannot be empty"))
+        gr.Warning("Text cannot be empty")
         return None, None
     try:
         task = tts_synthesizer.params_parser(data)
@@ -90,12 +84,6 @@ def get_characters_and_emotions():
 
 def change_character_list(character="", emotion="default"):
     characters_and_emotions = {}
-    
-    # Set up i18n
-    i18n = i18n_module.I18nAuto(
-        language=app_config.locale,
-        locale_path=f"gpt_sovits/Synthesizers/{synthesizer_name}/configs/i18n/locale",
-    )
 
     try:
         characters_and_emotions = get_characters_and_emotions()
@@ -119,10 +107,10 @@ def change_character_list(character="", emotion="default"):
 
     return (
         gr.Dropdown(
-            character_names, value=character_name_value, label=i18n("Select Character")
+            character_names, value=character_name_value, label="Select Character"
         ),
         gr.Dropdown(
-            emotions, value=emotion_value, label=i18n("Emotion List"), interactive=True
+            emotions, value=emotion_value, label="Emotion List", interactive=True
         ),
         characters_and_emotions,
     )
@@ -150,12 +138,6 @@ def cut_sentence_multilang(text, max_length=30):
     return text, ""
 
 def initialize_synthesizer():
-    # Set up internationalization support
-    i18n = i18n_module.I18nAuto(
-        language=app_config.locale,
-        locale_path=f"gpt_sovits/Synthesizers/{synthesizer_name}/configs/i18n/locale",
-    )
-
     # Dynamically import synthesizer module
     synthesizer_module = import_module(f"gpt_sovits.Synthesizers.{synthesizer_name}")
     TTS_Synthesizer = synthesizer_module.TTS_Synthesizer
@@ -165,7 +147,7 @@ def initialize_synthesizer():
     tts_synthesizer = TTS_Synthesizer(debug_mode=True)
     tts_task_example = TTS_Task()
     
-    return tts_synthesizer, tts_task_example, i18n
+    return tts_synthesizer, tts_task_example
 
 def download_gpt_sovits_models(status_box):
     try:
@@ -194,7 +176,6 @@ def download_gpt_sovits_models(status_box):
                 repo_id=repo_id,
                 filename=file_name,
                 local_dir=destination_dir,
-                local_dir_use_symlinks=False
             )
 
         status_box.update("Download completed successfully!")
