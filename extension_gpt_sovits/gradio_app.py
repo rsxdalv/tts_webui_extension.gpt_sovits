@@ -152,7 +152,7 @@ def initialize_synthesizer():
 def download_gpt_sovits_models(status_box):
     try:
         # Download NLTK resource
-        status_box.update("Downloading NLTK resources...")
+        yield "Downloading NLTK resources..."
         nltk.download('averaged_perceptron_tagger_eng')
 
         # Define paths
@@ -160,32 +160,32 @@ def download_gpt_sovits_models(status_box):
         destination_dir = "data/models/gpt_sovits/"
 
         # Create directory
-        status_box.update("Creating directories...")
+        yield "Creating directories..."
         os.makedirs(destination_dir, exist_ok=True)
 
         # Initialize HF API and get file list
-        status_box.update("Fetching file list from Hugging Face...")
+        yield "Fetching file list from Hugging Face..."
         api = HfApi()
         repo_files = api.list_repo_files(repo_id)
 
         # Download files
         total_files = len(repo_files)
         for idx, file_name in enumerate(repo_files, 1):
-            status_box.update(f"Downloading file {idx}/{total_files}: {file_name}")
+            yield f"Downloading file {idx}/{total_files}: {file_name}"
             hf_hub_download(
                 repo_id=repo_id,
                 filename=file_name,
                 local_dir=destination_dir,
             )
 
-        status_box.update("Download completed successfully!")
+        yield "Download completed successfully!"
         return "Download completed successfully!"
     except Exception as e:
         error_message = f"Error during download: {str(e)}"
-        status_box.update(error_message)
+        yield error_message
         return error_message
 
-def download_trained_models(status_box):
+def download_trained_models():
     try:
         hf_links = [''] * 10
         
@@ -205,7 +205,7 @@ def download_trained_models(status_box):
                 
             # Get character name from URL
             character_name = urllib.parse.unquote(os.path.basename(hf_link).rsplit('.', 1)[0])
-            status_box.update(f'Downloading {character_name}...')
+            yield f'Downloading {character_name}...'
 
             # Setup paths
             output_path = os.path.join('trained', character_name)
@@ -218,7 +218,7 @@ def download_trained_models(status_box):
                 file.write(response.content)
 
             # Extract zip file
-            status_box.update(f'Extracting {character_name}...')
+            yield f'Extracting {character_name}...'
             with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
                 for file_info in zip_ref.infolist():
                     # Decode and re-encode filename
@@ -234,13 +234,13 @@ def download_trained_models(status_box):
 
             # Clean up zip file
             os.remove(zip_file_path)
-            status_box.update(f'{character_name} downloaded and extracted successfully!')
+            yield f'{character_name} downloaded and extracted successfully!'
 
-        status_box.update("All trained models downloaded successfully!")
+        yield "All trained models downloaded successfully!"
         return "All trained models downloaded successfully!"
     except Exception as e:
         error_message = f"Error during download: {str(e)}"
-        status_box.update(error_message)
+        yield error_message
         return error_message
 
 def download_tab():
@@ -255,7 +255,6 @@ def download_tab():
             # Connect the download button to the download function
             download_gptsovits_btn.click(
                 fn=download_gpt_sovits_models,
-                inputs=[download_status],
                 outputs=[download_status]
             )
         
@@ -267,7 +266,6 @@ def download_tab():
             # Connect the trained models download button
             download_sovits_btn.click(
                 fn=download_trained_models,
-                inputs=[sovits_status],
                 outputs=[sovits_status]
             )
             
