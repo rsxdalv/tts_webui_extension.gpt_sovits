@@ -5,7 +5,7 @@ def extension__tts_generation_webui():
     return {
         "package_name": "extension_gpt_sovits",
         "name": "GPT-SoVITS",
-        "version": "0.1.0",
+        "version": "2.6.3",
         "requirements": "https://github.com/rsxdalv/GPT-SoVITS/releases/download/v2.6.3/gpt_sovits-2.6.3-py3-none-any.whl",
         "description": "GPT-SoVITS: A TTS solution powered by GPT and SoftVC VITS Singing Voice Conversion.",
         "extension_type": "interface",
