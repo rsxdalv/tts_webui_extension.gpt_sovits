@@ -1,12 +1,13 @@
 import gradio as gr
 
+
 def extension__tts_generation_webui():
     gpt_sovits_ui()
     return {
         "package_name": "extension_gpt_sovits",
-        "name": "GPT-SoVITS",
+        "name": "GPT-SoVITS [beta]",
         "version": "2.6.3",
-        "requirements": "https://github.com/rsxdalv/GPT-SoVITS/releases/download/v2.6.3/gpt_sovits-2.6.3-py3-none-any.whl",
+        "requirements": "git+https://github.com/rsxdalv/extension_gpt_sovits@main",
         "description": "GPT-SoVITS: A TTS solution powered by GPT and SoftVC VITS Singing Voice Conversion.",
         "extension_type": "interface",
         "extension_class": "text-to-speech",
@@ -15,12 +16,15 @@ def extension__tts_generation_webui():
         "license": "MIT",
         "website": "https://github.com/X-T-E-R/GPT-SoVITS-Inference",
         "extension_website": "https://github.com/rsxdalv/extension_gpt_sovits",
-        "extension_platform_version": "0.1.0",
+        "extension_platform_version": "0.0.1",
     }
+
 
 def gpt_sovits_ui():
     from extension_gpt_sovits.gradio_app import ui_core
+
     ui_core()
+
 
 if __name__ == "__main__":
     if "demo" in locals():
