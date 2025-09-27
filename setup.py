@@ -3,7 +3,7 @@ import setuptools
 setuptools.setup(
     name="tts_webui_extension.gpt_sovits",
     packages=setuptools.find_namespace_packages(),
-    version="0.1.0",
+    version="0.1.1",
     author="rsxdalv",
     description="GPT-SoVITS: A TTS solution powered by GPT and SoftVC VITS Singing Voice Conversion.",
     url="https://github.com/rsxdalv/tts_webui_extension.gpt_sovits",

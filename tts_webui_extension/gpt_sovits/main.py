@@ -20,7 +20,7 @@ def extension__tts_generation_webui():
 
 
 def gpt_sovits_ui():
-    from extension_gpt_sovits.gradio_app import ui_core
+    from .gradio_app import ui_core
 
     ui_core()
 
