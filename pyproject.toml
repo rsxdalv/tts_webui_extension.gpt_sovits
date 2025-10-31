@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tts_webui_extension.gpt_sovits"
+version = "0.1.1"
+description = "GPT-SoVITS: A TTS solution powered by GPT and SoftVC VITS Singing Voice Conversion."
+authors = [
+    {name = "rsxdalv"}
+]
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "gradio",
+    "gpt_sovits @ https://github.com/rsxdalv/GPT-SoVITS/releases/download/v2.6.3/gpt_sovits-2.6.3-py3-none-any.whl",
+]
+
+[project.urls]
+Homepage = "https://github.com/rsxdalv/tts_webui_extension.gpt_sovits"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+# This will find all namespace packages automatically
+namespaces = true
