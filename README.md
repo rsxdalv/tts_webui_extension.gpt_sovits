@@ -1,1 +1,1 @@
-## TTS Generation Webui / Harmonica extension for GPT SoVITS
+## TTS Webui extension for GPT SoVITS
