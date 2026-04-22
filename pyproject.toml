@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tts_webui_extension.gpt_sovits"
-version = "0.1.1"
+version = "0.1.2"
 description = "GPT-SoVITS: A TTS solution powered by GPT and SoftVC VITS Singing Voice Conversion."
 authors = [
     {name = "rsxdalv"}
@@ -17,7 +17,7 @@ classifiers = [
 ]
 dependencies = [
     "gradio",
-    "gpt_sovits @ https://github.com/rsxdalv/GPT-SoVITS/releases/download/v2.6.3/gpt_sovits-2.6.3-py3-none-any.whl",
+    "gpt_sovits @ https://github.com/rsxdalv/GPT-SoVITS/releases/download/v2.6.4/gpt_sovits-2.6.4-py3-none-any.whl",
 ]
 
 [project.urls]
