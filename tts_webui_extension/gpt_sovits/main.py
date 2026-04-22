@@ -1,7 +1,8 @@
 import gradio as gr
-
+from tts_webui.utils.torch_load_patch import apply_torch_load_patch
 
 def extension__tts_generation_webui():
+    apply_torch_load_patch()
     gpt_sovits_ui()
     return {
         "package_name": "tts_webui_extension.gpt_sovits",

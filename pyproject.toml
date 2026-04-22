@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tts_webui_extension.gpt_sovits"
-version = "0.1.2"
+version = "0.1.3"
 description = "GPT-SoVITS: A TTS solution powered by GPT and SoftVC VITS Singing Voice Conversion."
 authors = [
     {name = "rsxdalv"}
